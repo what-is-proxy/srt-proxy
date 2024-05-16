@@ -7,7 +7,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 
-cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required (VERSION 3.10)
 set (SRT_VERSION 1.5.3)
 
 set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/scripts")
@@ -255,7 +255,7 @@ if (NOT DEFINED WITH_COMPILER_TYPE)
 	# This is for a case when you provided the prefix, but you didn't
 	# provide compiler type. This option is in this form predicted to work
 	# only on POSIX systems. Just typical compilers for Linux and Mac are
-	# included. 
+	# included.
 	if (DARWIN)
 		set (WITH_COMPILER_TYPE clang)
 	elseif (POSIX) # Posix, but not DARWIN
@@ -543,7 +543,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Intel|Clang|AppleClang")
 	elseif (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang|AppleClang")
 		message(STATUS "NOTE: CLANG ${CMAKE_CXX_COMPILER_VERSION} detected, unsure if >=C++11 is default, forcing C++11 on applications")
 		set (FORCE_CXX_STANDARD 1)
-	else() 
+	else()
 		message(STATUS "NOTE: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} - assuming default C++11.")
 	endif()
 else()
@@ -1297,7 +1297,7 @@ endmacro()
 macro(srt_make_application name)
 
 	srt_set_stdcxx(${name} "${USE_CXX_STD_APP}")
-	
+
 	# This is recommended by cmake, but it doesn't work anyway.
 	# What is needed is that this below CMAKE_INSTALL_RPATH (yes, relative)
 	# is added as is.
@@ -1412,7 +1412,7 @@ if (ENABLE_APPS)
 			target_compile_options(uriparser-test PRIVATE -DTEST)
 			srt_set_stdcxx(uriparser-test "${USE_CXX_STD_APP}")
 		endif()
-		
+
 		srt_add_testprogram(srt-test-live)
 		srt_make_application(srt-test-live)
 
@@ -1452,11 +1452,11 @@ if (ENABLE_EXAMPLES)
 	srt_add_example(recvlive.cpp)
 
 	srt_add_example(sendfile.cpp)
-		
+
 	srt_add_example(recvfile.cpp)
 
 	srt_add_example(sendmsg.cpp)
-		
+
 	srt_add_example(recvmsg.cpp)
 
 	srt_add_example(test-c-client.c)
@@ -1477,7 +1477,7 @@ endif()
 
 if (ENABLE_UNITTESTS AND ENABLE_CXX11)
 
-	if (${CMAKE_VERSION} VERSION_LESS "3.10.0") 
+	if (${CMAKE_VERSION} VERSION_LESS "3.10.0")
 		message(STATUS "VERSION < 3.10 -- adding test using the old method")
 		set (USE_OLD_ADD_METHOD 1)
 	else()
