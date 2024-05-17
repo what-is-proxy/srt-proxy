@@ -1516,7 +1516,6 @@ if (ENABLE_UNITTESTS AND ENABLE_CXX11)
 
 	target_link_libraries(
 		test-srt
-		${GTEST_BOTH_LIBRARIES}
 		${srt_link_library}
 		${PTHREAD_LIBRARY}
 		)
